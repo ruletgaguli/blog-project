@@ -3,8 +3,12 @@ pub mod grpc_client;
 pub mod http_client;
 
 use serde::{Deserialize, Serialize};
+use std::time::Duration;
 
 use error::BlogClientError;
+
+pub(crate) const CONNECT_TIMEOUT: Duration = Duration::from_secs(5);
+pub(crate) const REQUEST_TIMEOUT: Duration = Duration::from_secs(10);
 
 #[derive(Clone)]
 pub enum Transport {
@@ -54,7 +58,7 @@ pub struct BlogClient {
 impl BlogClient {
     pub async fn new(transport: Transport) -> Result<Self, BlogClientError> {
         let (http_client, grpc_client) = match &transport {
-            Transport::Http(url) => (Some(http_client::HttpBlogClient::new(url)), None),
+            Transport::Http(url) => (Some(http_client::HttpBlogClient::new(url)?), None),
             Transport::Grpc(url) => (None, Some(grpc_client::GrpcBlogClient::connect(url).await?)),
         };
         Ok(Self {

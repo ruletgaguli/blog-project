@@ -1,6 +1,12 @@
-use tonic::{metadata::MetadataValue, transport::Channel, Request};
+use tonic::{
+    metadata::MetadataValue,
+    transport::{Channel, Endpoint},
+    Request,
+};
 
-use crate::{error::BlogClientError, AuthResponse, Post, PostList, User};
+use crate::{
+    error::BlogClientError, AuthResponse, Post, PostList, User, CONNECT_TIMEOUT, REQUEST_TIMEOUT,
+};
 
 pub mod proto {
     tonic::include_proto!("blog");
@@ -12,8 +18,13 @@ pub struct GrpcBlogClient {
 
 impl GrpcBlogClient {
     pub async fn connect(url: &str) -> Result<Self, BlogClientError> {
+        let channel = Endpoint::from_shared(url.to_string())?
+            .connect_timeout(CONNECT_TIMEOUT)
+            .timeout(REQUEST_TIMEOUT)
+            .connect()
+            .await?;
         Ok(Self {
-            client: proto::blog_service_client::BlogServiceClient::connect(url.to_string()).await?,
+            client: proto::blog_service_client::BlogServiceClient::new(channel),
         })
     }
 

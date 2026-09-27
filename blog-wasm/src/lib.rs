@@ -88,12 +88,35 @@ impl BlogApp {
     }
 
     pub async fn load_posts(&self) -> Result<JsValue, JsValue> {
-        let response = Request::get(&format!("{}/api/posts?limit=100&offset=0", self.server_url))
+        let mut posts = Vec::new();
+        // Сервер отдаёт не более 100 постов за запрос, поэтому собираем все страницы.
+        loop {
+            let response = Request::get(&format!(
+                "{}/api/posts?limit=100&offset={}",
+                self.server_url,
+                posts.len()
+            ))
             .send()
             .await
             .map_err(js_error)?;
-        let result = response_json(response).await?;
-        to_js(&result)
+            let result = response_json(response).await?;
+            let page = result
+                .get("posts")
+                .and_then(Value::as_array)
+                .ok_or_else(|| js_error("В ответе сервера нет списка постов"))?;
+            if page.is_empty() {
+                break;
+            }
+            posts.extend(page.iter().cloned());
+            let total = result
+                .get("total")
+                .and_then(Value::as_u64)
+                .ok_or_else(|| js_error("В ответе сервера нет общего числа постов"))?;
+            if posts.len() as u64 >= total {
+                break;
+            }
+        }
+        to_js(&json!({ "posts": posts }))
     }
 
     pub async fn get_post(&self, id: i64) -> Result<JsValue, JsValue> {

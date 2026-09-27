@@ -1,6 +1,7 @@
 /target/
 /Cargo.lock
 .env
+.sqlx/
 .blog_token
 /blog-wasm/pkg/
 .DS_Store

@@ -3,7 +3,7 @@ use serde::{de::DeserializeOwned, Serialize};
 
 use crate::{
     error::{status_error, BlogClientError},
-    AuthResponse, Post, PostList,
+    AuthResponse, Post, PostList, CONNECT_TIMEOUT, REQUEST_TIMEOUT,
 };
 
 pub struct HttpBlogClient {
@@ -12,11 +12,14 @@ pub struct HttpBlogClient {
 }
 
 impl HttpBlogClient {
-    pub fn new(url: &str) -> Self {
-        Self {
-            client: Client::new(),
+    pub fn new(url: &str) -> Result<Self, BlogClientError> {
+        Ok(Self {
+            client: Client::builder()
+                .connect_timeout(CONNECT_TIMEOUT)
+                .timeout(REQUEST_TIMEOUT)
+                .build()?,
             base_url: url.trim_end_matches('/').to_string(),
-        }
+        })
     }
 
     async fn read<T: DeserializeOwned>(&self, response: Response) -> Result<T, BlogClientError> {
