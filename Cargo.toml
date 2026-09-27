@@ -1,0 +1,31 @@
+[workspace]
+members = ["blog-server", "blog-client", "blog-cli", "blog-wasm"]
+default-members = ["blog-server", "blog-client", "blog-cli"]
+resolver = "2"
+
+[workspace.package]
+edition = "2021"
+
+[workspace.dependencies]
+actix-web = "4"
+actix-web-httpauth = "0.8"
+actix-cors = "0.7"
+anyhow = "1"
+argon2 = "0.5"
+chrono = { version = "0.4", features = ["serde"] }
+clap = { version = "4", features = ["derive"] }
+dotenvy = "0.15"
+jsonwebtoken = "9"
+prost = "0.14"
+protoc-bin-vendored = "3"
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sqlx = { version = "0.7", features = ["runtime-tokio-rustls", "postgres", "chrono", "migrate"] }
+thiserror = "1"
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+tonic = "0.14"
+tonic-prost = "0.14"
+tonic-prost-build = "0.14"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }

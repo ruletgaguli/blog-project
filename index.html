@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Поля | Блог</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <div class="brand"><span class="brand-mark">П</span><span>Поля</span></div>
+      <div class="header-actions">
+        <span id="auth-status" class="auth-status">Гость</span>
+        <button id="new-post" class="button primary" type="button" hidden>Новый пост</button>
+        <button id="logout" class="button quiet" type="button" hidden>Выйти</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell layout">
+    <section class="feed" aria-labelledby="feed-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Лента</p>
+          <h1 id="feed-title">Публикации</h1>
+        </div>
+        <button id="reload" class="button quiet" type="button">Обновить</button>
+      </div>
+      <p id="notice" class="notice" role="status" aria-live="polite"></p>
+      <div id="posts" class="posts" aria-live="polite"></div>
+    </section>
+
+    <aside class="side" aria-label="Аккаунт и редактор">
+      <section id="auth-panel" class="side-section">
+        <div class="tabs" role="tablist" aria-label="Доступ">
+          <button id="login-tab" role="tab" aria-selected="true" class="tab active" type="button">Вход</button>
+          <button id="register-tab" role="tab" aria-selected="false" class="tab" type="button">Регистрация</button>
+        </div>
+        <form id="auth-form" class="form">
+          <label id="email-field" hidden>Почта<input id="email" type="email" autocomplete="email"></label>
+          <label>Имя пользователя<input id="username" type="text" autocomplete="username" required></label>
+          <label>Пароль<input id="password" type="password" autocomplete="current-password" minlength="8" required></label>
+          <button id="auth-submit" class="button primary full" type="submit">Войти</button>
+        </form>
+      </section>
+
+      <section id="editor-panel" class="side-section" hidden>
+        <div class="editor-head">
+          <h2 id="editor-title">Новый пост</h2>
+          <button id="close-editor" class="button quiet" type="button">Закрыть</button>
+        </div>
+        <form id="post-form" class="form">
+          <label>Заголовок<input id="post-title" type="text" maxlength="255" required></label>
+          <label>Текст<textarea id="post-content" rows="12" required></textarea></label>
+          <button id="post-submit" class="button primary full" type="submit">Опубликовать</button>
+        </form>
+      </section>
+    </aside>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

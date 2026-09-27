@@ -1,0 +1,48 @@
+:root { color-scheme: light; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #17211e; background: #f7f8f6; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+button, input, textarea { font: inherit; }
+button { cursor: pointer; }
+.shell { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
+.site-header { border-bottom: 1px solid #dfe5df; background: #fff; }
+.header-inner { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+.brand { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 720; color: #173f32; }
+.brand-mark { display: inline-grid; place-items: center; width: 32px; height: 32px; background: #16694e; color: white; font-size: 20px; }
+.header-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+.auth-status { font-size: 13px; color: #5f716a; margin-right: 8px; }
+.layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 58px; padding: 44px 0 80px; }
+.feed, .side { min-width: 0; }
+.section-heading { display: flex; align-items: end; justify-content: space-between; gap: 16px; padding-bottom: 22px; border-bottom: 1px solid #d9e1da; }
+.eyebrow { margin: 0 0 6px; color: #16694e; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+h1 { margin: 0; font-size: 30px; line-height: 1.2; font-weight: 680; }
+h2 { margin: 0; font-size: 18px; }
+.notice { margin: 16px 0; color: #9c3a34; font-size: 14px; min-height: 20px; }
+.posts { display: grid; }
+.post { padding: 26px 0; border-bottom: 1px solid #dfe5df; }
+.post-head { display: flex; justify-content: space-between; gap: 20px; }
+.post-title { margin: 0 0 10px; font-size: 23px; line-height: 1.3; overflow-wrap: anywhere; }
+.post-meta { font-size: 12px; color: #6a7a70; }
+.post-content { margin: 16px 0 0; white-space: pre-wrap; line-height: 1.65; color: #33443b; overflow-wrap: anywhere; }
+.post-actions { display: flex; gap: 8px; align-items: flex-start; flex-wrap: wrap; flex-shrink: 0; }
+.empty { padding: 40px 0; color: #65756c; }
+.side { border-left: 1px solid #dfe5df; padding-left: 28px; }
+.side-section { position: sticky; top: 24px; }
+.tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-bottom: 1px solid #cbd8ce; margin-bottom: 22px; }
+.tab { border: 0; border-bottom: 2px solid transparent; color: #65756c; background: none; padding: 12px 4px; text-align: center; }
+.tab.active { border-color: #16694e; color: #16694e; font-weight: 650; }
+.form { display: grid; gap: 16px; }
+.form label { display: grid; gap: 7px; font-size: 13px; font-weight: 600; }
+input, textarea { width: 100%; border: 1px solid #bdccc1; border-radius: 4px; background: #fff; padding: 10px 11px; color: #17211e; outline-color: #16694e; }
+textarea { resize: vertical; min-height: 180px; }
+.button { min-height: 36px; padding: 8px 12px; border-radius: 4px; border: 1px solid #c6d3ca; color: #25483a; background: white; font-size: 13px; font-weight: 650; white-space: nowrap; }
+.button:hover { background: #ecf3ed; }
+.button.primary { border-color: #16694e; background: #16694e; color: white; }
+.button.primary:hover { background: #10533d; }
+.button.quiet { background: transparent; border-color: transparent; }
+.button.danger { color: #a43e39; border-color: #e6ccc8; }
+.button.full { width: 100%; margin-top: 4px; }
+.button:disabled { opacity: .55; cursor: default; }
+.editor-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 24px; }
+[hidden] { display: none !important; }
+@media (max-width: 780px) { .layout { grid-template-columns: minmax(0, 1fr); gap: 30px; padding-top: 26px; } .side { border-left: 0; border-top: 1px solid #dfe5df; padding: 25px 0 0; } .side-section { position: static; } .post-head { display: block; } .post-actions { margin-top: 15px; } }
+@media (max-width: 480px) { .shell { width: min(calc(100% - 28px), 1160px); } .header-inner { min-height: 64px; } .auth-status { width: 100%; text-align: right; } .header-actions { gap: 2px; } h1 { font-size: 26px; } .post-title { font-size: 21px; } }

@@ -1,0 +1,29 @@
+[package]
+name = "blog-server"
+version = "0.1.0"
+edition.workspace = true
+
+[dependencies]
+actix-web.workspace = true
+actix-web-httpauth.workspace = true
+actix-cors.workspace = true
+anyhow.workspace = true
+argon2.workspace = true
+chrono.workspace = true
+dotenvy.workspace = true
+jsonwebtoken.workspace = true
+prost.workspace = true
+rand_core = { version = "0.6", features = ["getrandom"] }
+serde.workspace = true
+serde_json.workspace = true
+sqlx.workspace = true
+thiserror.workspace = true
+tokio.workspace = true
+tonic.workspace = true
+tonic-prost.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+
+[build-dependencies]
+tonic-prost-build.workspace = true
+protoc-bin-vendored.workspace = true
